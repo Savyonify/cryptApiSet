@@ -1,0 +1,14 @@
+{ 
+   "link":"github.com/luckyfaust/arcanum",
+   "apis":[ 
+      "security",
+      "crypto"
+   ],
+   "usage":[ 
+      "Secure Random",
+      "AES",
+      "Key & Signature",
+      "Cipher",
+      "Sha256"
+	]
+}
