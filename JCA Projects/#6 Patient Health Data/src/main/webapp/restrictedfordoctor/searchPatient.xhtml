@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition template="/resources/phd/common.xhtml">
+		<ui:define name="content">
+		
+			<h:outputScript library="js" name="CryptoJS/rollups/aes.js" />
+			<h:outputScript library="js" name="validate_patient.js" />
+		
+			<div id="content">
+			
+				<h1>
+					<h:outputText value="#{msg['searchpatient']}" />
+				</h1>
+			
+				<div class="box">
+										
+					<h:form id="searchform">
+										
+						<div id="filter">
+							<h:inputText id="filter" />
+							<h:commandButton class="filterbutton" onclick="return filter();" value="Filter Patient" />
+						</div>
+						<div class="table">
+						<table id="patienttable">
+<!-- 							<thead> -->
+<!-- 								<tr id="rowheader"> -->
+<!-- 									<th class="table-header">ID</th> -->
+<!-- 									<th class="table-header">Firstname</th> -->
+<!-- 									<th class="table-header">Lastname</th> -->
+<!-- 									<th class="table-header">Birthday</th> -->
+<!-- 								</tr> -->
+<!-- 							</thead> -->
+	
+							<c:forEach items="#{loginController.searchPatients()}" var="patient" varStatus="status">
+								<tr id="row#{status.index}">
+									<td class="table-column-id">
+										<h:commandLink action="#{navigation.redirectToEditPatient}" class="tableid" id="id#{status.index}" value="#{patient.patientid}">
+											<f:setPropertyActionListener target="#{loginController.activePatient}" value="#{patient}" />
+										</h:commandLink>
+									</td>
+									<td class="table-column-data">
+										<h:outputText id="firstname#{status.index}"/>
+									</td>
+									<td class="table-column-data">
+										<h:outputText id="lastname#{status.index}"/>
+									</td>
+									<td class="table-column-data">
+										<h:outputText id="birthday#{status.index}" />
+									</td>
+									<td class="table-column-button">
+										<h:commandButton action="#{loginController.setActivePatient(patient)}" class="cleanbutton" id="patientdatas#{status.index}" value="Patient Datas" />
+									</td>
+									<td class="table-column-data">
+										<h:outputText rendered="#{(loginController.isOwner(patient))}" value="Owner" />
+									</td>
+									<td class="table-column-hidden">
+										<h:inputHidden id="encryptedPersonalData#{status.index}" value="#{patient.personalData}"/>
+									</td>
+								</tr>
+							</c:forEach>							
+						</table>
+						<h:commandButton class="pagebutton" id="backward" onclick="return backward();" value="backward" />
+						<h:outputText id="pagenumber" value="Page 1" />
+						<h:commandButton class="pagebutton" id="forward" onclick="return forward();" value="forward" />
+						</div>
+					</h:form>
+				</div>
+				
+				<hr />
+				
+				<div class="box">
+					<div id="patientheader">
+						<h:outputText class="patientheader" id="firstname" />
+						<h:outputText class="patientheader" id="lastname" />
+						<h:outputText class="patientheader" id="birthday" />
+					</div>
+					
+					<h:form id="formularform" rendered="#{not empty loginController.activePatient}">
+						<h:commandButton action="#{navigation.redirectToNewQuestionnaire}"
+							rendered="#{loginController.insertAccess(loginController.activePatient)}"
+							value="insert a new entry" />
+						<h:dataTable
+							first="#{entityManager.getPaginatorPatientData().first}"
+							rows="#{entityManager.getPaginatorPatientData().pagesize}"
+							value="#{loginController.getPatientDatas()}" 
+							var="questionnaire"
+							headerClass="table-header"
+							rowClasses="table-odd-row,table-even-row"
+							columnClasses="table-column-id,table-column-data,table-column-data">
+							<h:column>
+								<f:facet name="header">ID</f:facet>
+								<h:commandLink action="#{navigation.redirectToFilledQuestionnaire}" class="tableid" value="#{questionnaire.questId}">
+									<f:setPropertyActionListener target="#{loginController.patientid}" value="#{questionnaire}" />
+								</h:commandLink>
+							</h:column>
+							<h:column>
+								<f:facet name="header">Date</f:facet>
+								<h:outputText value="#{questionnaire.date}"/>
+							</h:column>
+							<h:column>
+								<f:facet name="header">Type of questionnaire</f:facet>
+								<h:outputText value="#{questionnaire.typOfQuest}"/>
+							</h:column>
+							<f:facet name="footer">
+								<h:panelGroup>
+									<h:commandButton action="#{entityManager.getPaginatorPatientData().backward}"
+										class="pagebutton"
+										rendered="#{entityManager.getPaginatorPatientData().hasPrevious()}"	
+										value="&lt;&lt; Page #{entityManager.getPaginatorPatientData().pagenr - 1}" />
+									<h:outputText
+										value="Page #{entityManager.getPaginatorPatientData().pagenr}" />
+									<h:commandButton action="#{entityManager.getPaginatorPatientData().forward}"
+										class="pagebutton"
+										rendered="#{entityManager.getPaginatorPatientData().hasNext()}"	
+										value="Page #{entityManager.getPaginatorPatientData().pagenr + 1} &gt;&gt;" />
+								</h:panelGroup>
+							</f:facet>
+						</h:dataTable>
+						
+						<h:inputHidden id="encryptedPersonalData" value="#{loginController.activePatient.personalData}"/>
+						
+					</h:form>
+					
+				</div>
+				
+			</div>
+
+			<h:outputScript type="text/javascript">
+			    decryptPersonalDataForSearch();
+     		</h:outputScript>
+   		
+     		<h:outputScript type="text/javascript">
+			    decryptPersonalDataForFormular();
+     		</h:outputScript>
+			
+		</ui:define>
+	</ui:composition>
+
+this is not displayed
+
+   </h:body>
+</html>

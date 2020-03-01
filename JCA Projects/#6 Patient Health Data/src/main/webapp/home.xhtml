@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition template="/resources/phd/common.xhtml">
+		<ui:define name="content">
+		
+			<h:outputScript library="js" name="CryptoJS/rollups/sha256.js" />
+			<h:outputScript library="js" name="CryptoJS/rollups/aes.js" />
+			<h:outputScript library="js" name="validate_login.js" />			
+		
+			<div id="content">
+			
+				<h1>
+					<h:outputText value="#{msg['home']}" />
+				</h1>
+			
+				<div class="formular">
+				
+					<h:form id="loginform" onsubmit="return validation();">
+												
+						<h:panelGrid columns="2" columnClasses="table-column-label,table-column-input" rendered="#{!loginController.loggedin}">
+							<h:outputLabel for="name" value="Username" />
+							<h:inputText id="name" binding="#{name}">
+								<f:validateRegex pattern="([A-Za-z0-9@.])+"/>
+								<f:ajax event="change" render="salt"/>
+							</h:inputText>
+							<h:outputLabel for="password" value="Password" />
+							<h:inputSecret id="password" binding="#{password}"/>
+							<h:outputLabel for="department" value="Department" />
+							<h:selectOneMenu id="department" value="#{loginController.departmentselected}">
+								<f:selectItem itemLabel="SELECT" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{loginController.departments}" var="department" itemValue="#{department}" itemLabel="#{department.name}"/>
+								<f:ajax event="change" render="salt"/>
+							</h:selectOneMenu>	
+							<h:outputText />
+							<h:commandButton action="#{loginController.login(name.value, password.value)}" value="Login" />
+						</h:panelGrid>
+
+						<h:inputHidden id="nonce" value="#{loginController.nonce}" />
+												
+					</h:form>
+					
+					<h:inputHidden id="salt" value="#{loginController.getSaltFromStaff(name.value)}"/>
+											
+				</div>
+				
+				<hr />
+				
+				<div class="formular">
+					<h:form>
+						<h:commandButton action="#{navigation.redirectToRegisterNew}"
+							value="Register new" />
+					</h:form>
+				</div>
+			
+			</div>	
+			
+		</ui:define>
+	</ui:composition>
+
+this is not displayed	
+
+</h:body>
+</html>

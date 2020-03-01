@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition template="/resources/phd/common.xhtml">
+		<ui:define name="content">
+		
+			<h:outputScript library="js" name="JSEncrypt/bin/jsencrypt.min.js" />
+			<h:outputScript library="js" name="validate_group.js" />
+			
+			<div id="content">
+			
+				<h1>
+					<h:outputText value="#{msg['modifygroup']}" />
+				</h1>
+			
+				<div class="box">
+									
+					<h:form id="groupform" >
+						<div id="filter">
+							<h:inputText binding="#{staffname}" id="staffid"></h:inputText>
+							<h:commandButton class="filterbutton" value="Filter Staff">
+								<f:ajax execute="staffid" render="outputMessage" />
+							</h:commandButton>
+						</div>
+						<div class="table">
+							<h:dataTable first="#{entityManager.getPaginatorGroup().first}"
+								id="outputMessage"
+								rows="#{entityManager.getPaginatorGroup().pagesize}"
+								value="#{loginController.searchStaffsInGroup(staffname.value)}"
+								var="staff" 
+								headerClass="table-header"
+								rowClasses="table-odd-row,table-even-row"
+								columnClasses="table-column-id,table-column-data,table-column-button,table-column-hidden,table-column-hidden">
+
+								<h:column>
+									<f:facet name="header">ID</f:facet>
+									<h:outputText class="tableid" value="#{staff.id}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">Name</f:facet>
+									<h:outputText value="#{staff.name}" />
+								</h:column>
+	
+								<h:column>
+									<h:commandButton action="#{loginController.activateStaff(staff, groupKey.value)}"
+										id="activate" 
+										onclick="return encryptGroupKey(this);"
+										rendered="#{!(staff.getActivated())}" 
+										value="Activate" />
+									<h:commandButton action="#{loginController.deactivateStaff(staff)}"
+										id="deactivate" 
+										rendered="#{staff.getActivated()}" 
+										value="Deactivate" />
+								</h:column>
+								<h:column>
+									<h:inputHidden id="publicKey" value="#{staff.publicKey}" />
+								</h:column>
+								<h:column>
+									<h:inputHidden id="encryptedGroupKey" binding="#{groupKey}" />
+								</h:column>
+								
+								<f:facet name="footer">
+									<h:panelGroup>
+										<h:commandButton action="#{entityManager.getPaginatorGroup().backward}"
+											class="pagebutton"
+											rendered="#{entityManager.getPaginatorGroup().hasPrevious()}"
+											value="&lt;&lt; Page #{entityManager.getPaginatorGroup().pagenr - 1}" />
+										<h:outputText
+											value="Page #{entityManager.getPaginatorGroup().pagenr}" />
+										<h:commandButton action="#{entityManager.getPaginatorGroup().forward}"
+											class="pagebutton"
+											rendered="#{entityManager.getPaginatorGroup().hasNext()}"	
+											value="Page #{entityManager.getPaginatorGroup().pagenr + 1} &gt;&gt;" />
+									</h:panelGroup>
+								</f:facet>
+							</h:dataTable>
+						</div>
+					</h:form>
+					
+				</div>
+				
+				<hr />
+				
+				<div class="box">
+					<h:form id="renewform">
+						<h:commandButton action="#{navigation.redirectToRenewGroupKey}" value="Renew Group Key" />
+					</h:form>
+				</div>
+				
+			</div>
+			
+		</ui:define>
+	</ui:composition>
+
+this is not displayed
+
+   </h:body>
+</html>

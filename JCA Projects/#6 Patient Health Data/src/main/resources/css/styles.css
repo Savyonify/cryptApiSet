@@ -1,0 +1,241 @@
+body {
+    background-color: #eeeeee;
+	font-family: Helvetica;
+	width: 1024px;
+}
+a {
+	text-decoration: none;
+}
+div#header {
+	padding: 20px 20px 20px 20px;
+}
+div#content {
+	padding: 20px 20px 20px 20px;
+}
+div#footer {
+	padding: 20px 20px 20px 20px;
+}
+
+div#headerlanguages {
+	text-align: right;
+}
+.headerlanguage {
+	padding: 10px 10px 10px 10px;
+}
+
+div#menu {
+}
+.menuitem {
+	background-color: #ffffff;
+	border-radius: 5px;
+	box-shadow: 5px 5px 10px #666;
+	color: #000000;
+	display: block;
+	font-size: 25px;
+	margin: 10px 0px 0px 0px;
+	padding: 10px 10px 10px 10px;
+	transition: background 0.3s linear 0s;
+}
+.menuitem:hover {
+    background-color: #ff0000;
+    border-radius: 5px;
+}
+
+div#loggedinbox {
+	float: right;
+	padding: 10px 10px 10px 10px;
+}
+
+.formular {
+	background-color: #ffffff;
+	border-color: #bbbbbb;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 10px 10px 25px #666;
+	height: auto;
+	padding: 20px 20px 20px 20px;	
+	width: auto;
+}
+
+.box {
+	background-color: #eeeeee;
+	border-color: #bbbbbb;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 10px 10px 25px #666;
+	height: auto;
+	padding: 20px 20px 20px 20px;
+	width: auto;
+}
+
+div#patientheader {
+	margin: 0px 0px 20px 0px;
+}
+
+.patientheader {
+	padding: 0px 10px 0px 0px;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+div#patientname {
+	border-color: #bbbbbb;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 10px 10px 25px #666;
+	margin-right:0px;
+	height: auto;
+	min-height: 100px;
+	padding: 20px 20px 20px 20px;
+	width: auto;
+	float:right;
+}
+
+div#quests {
+	border-color: #bbbbbb;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 10px 10px 25px #666;
+	margin-left:0px;
+	margin-right: 200px;
+	height: auto;
+	min-height: 100px;
+	padding: 20px 20px 20px 20px;
+	width: auto;
+}
+
+div#filter {
+	padding: 0px 0px 20px 0px;
+}
+
+.question {
+	padding: 10px 0px 10px 0px;
+}
+
+td {
+	padding: 2px 10px 2px 10px;
+}
+.table {
+	
+}
+.table-header {
+	padding: 10px 10px 10px 10px;
+}
+.table-odd-row {
+	background-color: #bbbbbb;
+	padding: 10px 10px 10px 10px;
+}
+.table-even-row {
+	background-color: #dddddd;
+	padding: 10px 10px 10px 10px;
+}
+.table-column-id {
+	background-color: #0088dd;
+	border-radius: 5px;
+	padding: 5px 5px 5px 5px;
+}
+.table-column-id:hover {
+	background-color: #00aaff;
+	transform: scale(1.1);
+	-webkit-transform: scale(1.1);
+}
+.table-column-data {
+	border-radius: 5px;
+	padding: 5px 5px 5px 5px;
+}
+.table-column-button {
+	background-color: #eeeeee;
+	padding: 5px 5px 5px 5px;
+}
+.table-column-hidden {
+	background-color: #eeeeee;
+}
+.tableid {
+	color: #000000;
+}
+.table-column-label {
+	text-align: right;
+}
+.table-column-input {
+
+}
+
+label {
+	font-size: medium;
+}
+span {
+	font-size: medium;
+}
+input[type=submit] {
+	background-color: #0088ff;
+	border-radius: 5px;
+	border-width: 1px;
+	color: #ffffff;
+	font-size: medium;
+	font-weight: bold;
+	padding: 5px 10px 5px 10px;
+}
+input[type=submit]:hover{
+	background-color: #44aaff;
+}
+input[type=submit].filterbutton {
+	background-color: #000000;
+	color: #ffffff;
+	margin: 0px 0px 0px 10px;
+}
+input[type=submit].pagebutton {
+	background-color: #000000;
+	color: #ffffff;
+	margin: 0px 10px 0px 10px;
+}
+input[type=submit].cleanbutton {
+	background-color: #ffffff;
+	color: #000000;
+}
+input[type=submit].cleanbutton:hover {
+	background-color: #cccccc;
+}
+textarea {
+	background-color: #ffffff;
+	border-radius: 5px;
+	border-width: 1px;
+	color: #000000;
+	font-size: medium;
+	padding: 5px 10px 5px 10px;
+}
+input[type=text] {
+	background-color: #ffffff;
+	border-radius: 5px;
+	border-width: 1px;	
+	color: #000000;
+	font-size: medium;
+	padding: 5px 10px 5px 10px;
+}
+input[type=password] {
+	background-color: #ffffff;
+	border-radius: 5px;
+	border-width: 1px;
+	color: #000000;
+	font-size: medium;
+	padding: 5px 10px 5px 10px;
+}
+input[type=checkbox] {
+	transform: scale(1.5);
+	-webkit-transform: scale(1.5);
+}       
+input[type=radio] {
+	transform: scale(1.5);
+	-webkit-transform: scale(1.5);
+}
+select {
+	background-color: #dddddd;
+	border-radius: 5px;
+	border-width: 1px;
+	color: #000000;
+	font-size: medium;
+	padding: 2px 10px 2px 10px;
+}

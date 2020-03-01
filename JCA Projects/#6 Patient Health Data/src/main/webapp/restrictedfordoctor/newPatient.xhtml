@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition template="/resources/phd/common.xhtml">
+		<ui:define name="content">
+		
+			<h:outputScript library="js" name="CryptoJS/rollups/aes.js" />
+			<h:outputScript library="js" name="validate_patient.js" />
+		
+			<div id="content">
+			
+				<h1>
+					<h:outputText value="#{msg['newpatient']}" />
+				</h1>
+			
+				<div class="formular">
+									
+					<h:form id="patientform" onsubmit="return validation();">
+						<h:panelGrid columns="2" columnClasses="table-column-label,table-column-input">
+							<h:outputLabel for="firstname" value="Firstname" />
+							<h:inputText id="firstname" required="true" />
+							
+							<h:outputLabel for="lastname" value="Lastname" />
+							<h:inputText id="lastname" required="true" />
+					
+							<h:outputLabel for="street" value="Street" />
+							<h:inputText id="street" required="true" />
+		
+							<h:outputLabel for="nr" value="Nr" />
+							<h:inputText id="nr" required="true" />
+		
+							<h:outputLabel for="city" value="City" />
+							<h:inputText id="city" required="true" />
+	
+							<h:outputLabel for="zip" value="Zip" />
+							<h:inputText id="zip" required="true" />
+	
+							<h:outputLabel for="telnumber" value="Telnumber" />
+							<h:inputText id="telnumber" required="true" />
+
+							<h:outputLabel for="gender" value="Gender" />
+							<h:selectOneRadio id="gender" required="true">
+								<f:selectItem itemLabel="Male" itemValue="male" />
+								<f:selectItem itemLabel="Female" itemValue="female" />
+							</h:selectOneRadio>
+
+							<h:outputLabel for="birthday" value="Birthday (dd.mm.yyyy)" />
+							<h:inputText id="birthday" required="true" />
+
+							<h:outputText />
+							<h:commandButton action="#{loginController.createPatient(patient)}" value="Add New Patient" />
+						
+						</h:panelGrid>
+						
+						<h:inputHidden id="encryptedPersonalData" value="#{patient.personalData}" />
+						
+					</h:form>
+					
+				</div>
+				
+			</div>
+			
+		</ui:define>
+	</ui:composition>
+
+this is not displayed
+	
+</h:body>
+</html>

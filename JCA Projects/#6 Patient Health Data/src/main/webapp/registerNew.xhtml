@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition template="/resources/phd/common.xhtml">
+		<ui:define name="content">
+		
+			<h:outputScript library="js" name="CryptoJS/rollups/sha256.js" />
+			<h:outputScript library="js" name="CryptoJS/rollups/aes.js" />
+			<h:outputScript library="js" name="JSEncrypt/bin/jsencrypt.min.js" />
+			<h:outputScript library="js" name="validate_registernew.js" />		
+		
+			<div id="content">
+				
+				<h1>
+					<h:outputText value="#{msg['registernew']}" />
+				</h1>
+				
+				<div class="formular">
+									
+					<h:form id="registernewform" onsubmit="return validation();">
+						<h:panelGrid columns="2" columnClasses="table-column-label,table-column-input">
+							<h:outputLabel for="name" value="Username" />
+							<h:inputText id="name" required="true" value="#{staff.name}">
+								<f:validateRegex pattern="([A-Za-z0-9@.])+"/>
+							</h:inputText>
+							<h:outputLabel for="newpass" value="New Password" />
+							<h:inputSecret id="newpass" required="true" value="#{staff.password}" />
+							
+							<h:outputLabel for="confpass" value="Confirm Password" />
+							<h:inputSecret id="confpass" required="true" />							
+							
+							<h:outputLabel for="role" value="Role"/>
+							<h:selectOneRadio id="role" required="true" value="#{staff.role}">
+								<f:selectItem id="roledoctor" itemLabel="Doctor" itemValue="1" />
+								<f:selectItem id="rolestatistician" itemLabel="Statistician" itemValue="2" />
+							</h:selectOneRadio>
+							<h:outputLabel for="department" value="Department"/>
+							<h:selectOneMenu id="department" value="#{loginController.departmentselected}">
+								<f:selectItem itemLabel="ADD NEW" itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{loginController.departments}" var="department" itemValue="#{department}" itemLabel="#{department.name}" />
+								<f:ajax render="depname_l depname regnew regnewwithdep" event="valueChange" />
+							</h:selectOneMenu>
+							<h:panelGroup id="depname_l">
+								<h:outputText rendered="#{empty loginController.departmentselected}" value="Name" />
+							</h:panelGroup>
+							<h:panelGroup id="depname">
+								<h:inputText id="departmentname" value="#{department.name}" rendered="#{empty loginController.departmentselected}">
+									<f:validateRegex pattern="([A-Za-z])+"/>								
+								</h:inputText>						
+							</h:panelGroup>
+							
+							<h:outputText />
+							<h:panelGroup id="regnew">
+								<h:commandButton action="#{loginController.registerNew(staff)}" rendered="#{not empty loginController.departmentselected}" value="Register new" />
+							</h:panelGroup>
+							<h:outputText />
+							<h:panelGroup id="regnewwithdep">
+								<h:commandButton action="#{loginController.registerNewWithDepartment(staff, department, groupKey.value)}" rendered="#{empty loginController.departmentselected}" value="Register new" />
+							</h:panelGroup>			
+							
+						</h:panelGrid>
+						
+						<h:inputHidden id="salt" value="#{staff.salt}"/>
+						<h:inputHidden id="encryptedPrivateKey" value="#{staff.privateKey}" />
+						<h:inputHidden id="publicKey" value="#{staff.publicKey}" />
+						<h:inputHidden id="encryptedGroupKey" binding="#{groupKey}" />
+					
+					</h:form>
+				
+				</div>
+			
+			</div>
+
+		</ui:define>
+	</ui:composition>
+
+this is not displayed
+
+   </h:body>
+</html>

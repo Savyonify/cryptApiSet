@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:animateLayoutChanges="true"
+    tools:context="com.kermekx.smartchatting.PinActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome !"
+        android:layout_alignTop="@+id/view"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/welcome"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/view">
+
+        <EditText
+            android:id="@+id/pin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/prompt_pin"
+            android:inputType="numberPassword"
+            android:maxLength="8"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:imeActionLabel="@string/action_unlock_short"
+            android:imeOptions="actionUnspecified"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_below="@+id/welcome"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/unlock_button"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/action_unlock_short"
+            android:background="@drawable/background_button"
+            android:textColor="@color/grayLighter"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:textStyle="bold"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>

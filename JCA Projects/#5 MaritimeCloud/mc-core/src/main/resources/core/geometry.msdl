@@ -1,0 +1,33 @@
+namespace core;
+
+/**  The type of shapes that are supported. */
+@JavaImplementation("net.maritimecloud.util.geometry.Area")
+message Area {
+  1: AreaUnion union;
+  2: Circle circle;
+  3: Rectangle box;
+  4: Polygon polygon;
+} 
+
+@JavaImplementation("net.maritimecloud.util.geometry.Circle")
+message Circle {
+  1: position center;
+  2: float radius;
+}
+
+@JavaImplementation("net.maritimecloud.util.geometry.Rectangle")
+message Rectangle {
+  1: position topLeft;
+  2: position buttomRight;
+}
+
+@JavaImplementation("net.maritimecloud.util.geometry.Polygon")
+message Polygon {
+   1: list<position> points;
+}
+
+@JavaImplementation("net.maritimecloud.util.geometry.AreaUnion")
+message AreaUnion {
+   1: list<Area> area;
+}
+
